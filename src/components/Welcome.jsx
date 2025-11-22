@@ -18,7 +18,7 @@ const renderText = (text, className, baseWeight = 400) => {
 }
 
 const setupTextHover = (container, type) => {
-    if(!container) return;
+    if(!container) return () => {};
 
     const letters = container.querySelectorAll("span")
     const {min, max, default: base} = FONT_WEIGHTS[type]
@@ -34,7 +34,7 @@ const setupTextHover = (container, type) => {
         letters.forEach((letter) => {
             const {left: l, width: w} = letter.getBoundingClientRect()
             const distance = Math.abs(mouseX - (l - left + w /2));
-            const intensity = Math.exp(-(distance ** 2) / 2000);
+            const intensity = Math.exp(-(distance ** 2.5) / 2000);
 
             animateLetter(letter, min + (max - min) * intensity)
         })
@@ -70,7 +70,7 @@ const Welcome = () => {
         <h1 ref={titleRef} className='mt-7'>{renderText("portfolio", 'text-9xl italic font-georama', 400)}</h1>
 
         <div className='small-screen'>
-            <p>This portfolio is designed for dekstop/tabled screens only.</p>
+            <p>This portfolio is designed for desktop/tablet screens only.</p>
         </div>
     </section>
   )
